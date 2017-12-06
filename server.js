@@ -22,6 +22,8 @@ app.use(bodyParser.json({ type: 'application/vnd.custom-type'}));
 // parse an HTML body into a string
 app.use(bodyParser.text({ type: 'text/html'}));
 
+require("./app/routing/html-route.js")(app);
+
 app.listen(PORT, function() {
     console.log("app listening on PORT: " + PORT);
 });
