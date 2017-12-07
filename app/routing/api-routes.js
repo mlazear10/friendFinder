@@ -25,7 +25,7 @@ module.exports = function(app) {
         var totalDifference;
         // loop through the friend possiblities to find the total differences
         for (var i = 0; i < friends.length; i++) {
-            console.log(friends[i]);
+            // console.log(friends[i]);
             totalDifference = 0;
             //We then loop throught the scores of each friend
             for (var j = 0; j < friends[i].scores[j]; j++) {
@@ -44,7 +44,6 @@ module.exports = function(app) {
         friends.push(userData);
         //return a JSON object with the user's bestMatch. This will be sued by the HMTL in the next page
         res.json(bestMatch);
-
-    })
+    });
 }
 
