@@ -1,0 +1,20 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "find friends that are most like you",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlazear10/friendFinder.git"
+  },
+  "author": "mike lazer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlazear10/friendFinder/issues"
+  },
+  "homepage": "https://github.com/mlazear10/friendFinder#readme"
+}

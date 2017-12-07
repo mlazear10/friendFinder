@@ -151,12 +151,107 @@
 
     <footer class="footer">
       <div class="container">
-        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/afhaque/friendfinder">GitHub Repo</a></p>
+        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/mlazear10/friendFinder">GitHub Repo</a></p>
       </div>
     </footer>
 
   </div>
 
+  <div id="resultsModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h2 class='modal-title'><strong>Best Match</strong></h2>
+            </div>
+            <div class='modal-body'>
+                <h2 id='matchName'></h2>
+                <img id="matchImg" src="http://nshipster.s3.amazonaws.com/mike-lazer-walker.jpg" alt="img">
+            </div>
+            <div class='modal-footer'>
+                <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+     // Chosen CSS
+    //  var config = {
+    //   ".chosen-select": {},
+    //   ".chosen-select-deselect": {
+    //     allow_single_deselect: true
+    //   },
+    //   ".chosen-select-no-single": {
+    //     disable_search_threshold: 10
+    //   },
+    //   ".chosen-select-no-results": {
+    //     no_results_text: "Oops, nothing found!"
+    //   },
+    //   ".chosen-select-width": {
+    //     width: "95%"
+    //   }
+    // };
+
+    // for (var selector in config) {
+    //   $(selector).chosen(config[selector]);
+    // }
+
+    // capture the form inputs
+    $('#submit').on("click", function(){
+        event.preventDefault();
+
+        function validateForm() {
+            var isValid = true;
+            $(".form-control").each(function(){
+                if($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+            $(".chosen-select").each(function(){
+                if ($(this).val() === "") {
+                    isValid = false;
+                }
+            });
+            return isValid;
+        }
+        // if all required fields are filled
+        if (validateForm()) {
+            //create an object for the user's data
+            var userData = {
+                name: $("#name").val(),
+                photo: $("#photo").val(),
+                scores: [
+                  $("#q1").val(),
+                  $("#q2").val(),
+                  $("#q3").val(),
+                  $("#q4").val(),
+                  $("#q5").val(),
+                  $("#q6").val(),
+                  $("#q7").val(),
+                  $("#q8").val(),
+                  $("#q9").val(),
+                  $("#q10").val()
+                ]
+            } 
+        };
+        // Grab the URL of the website
+        var currentURL = window.location.origin;
+
+        // AJAX post the data to the friends API.
+        $.post("/api/friends", userData, function(data) {
+            // Grab the result from the AJAX post so that the nest match's name and photo area displayed
+            $('#matchName').text(data.name);
+            $('#matchImg').attr('src', data.photo);
+
+            // shows the modal with the best match
+            $('#resultsModal').modal("toggle");
+            //alert("working");
+        })
+    });
+
+</script>
 
 </body>
 
